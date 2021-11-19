@@ -1,0 +1,23 @@
+{
+    "name": "augustash/module-goto-sku",
+    "type": "magento2-module",
+    "description": "Magento 2 Product SKU Redirection",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "require": {
+        "magento/module-catalog": "*"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Augustash\\GotoSku\\": "src/"
+        },
+        "files": [
+            "src/registration.php"
+        ]
+    }
+}
