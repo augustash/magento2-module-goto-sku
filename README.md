@@ -16,7 +16,7 @@ Install the extension using Composer using our development package repository:
 
 ```bash
 composer config repositories.augustash composer https://augustash.repo.repman.io
-composer require augustash/module-goto-sku:~1.0.0
+composer require augustash/module-goto-sku:~1.0.1
 bin/magento module:enable --clear-static-content Augustash_GotoSku
 bin/magento setup:upgrade
 bin/magento cache:flush
