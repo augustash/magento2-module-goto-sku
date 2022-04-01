@@ -87,7 +87,7 @@ class Router implements RouterInterface
             && \count($urlParts) == 2 && $urlParts[0] == 'goto') {
             try {
                 /** @var \Magento\Catalog\Model\Product $product */
-                $product = $this->productRepository->get($urlParts[1]);
+                $product = $this->productRepository->get(\urldecode($urlParts[1]));
                 $redirectUrl = $product->getUrlModel()->getUrl($product);
                 $this->response->setRedirect($redirectUrl, 301);
                 $request->setDispatched(true);

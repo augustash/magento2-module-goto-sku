@@ -2,7 +2,7 @@
     "name": "augustash/module-goto-sku",
     "type": "magento2-module",
     "description": "Magento 2 Product SKU Redirection",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": [
         "MIT"
     ],
