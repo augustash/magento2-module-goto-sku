@@ -4,10 +4,11 @@
  * Product SKU Redirection Module
  *
  * @author    Peter McWilliams <pmcwilliams@augustash.com>
- * @copyright Copyright (c) 2021 August Ash (https://www.augustash.com)
+ * @copyright 2022 August Ash, Inc. (https://www.augustash.com)
  */
 
 declare(strict_types=1);
+
 namespace Augustash\GotoSku\Controller;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -28,26 +29,6 @@ use Magento\Framework\UrlInterface;
 class Router implements RouterInterface
 {
     /**
-     * @var \Magento\Framework\App\ActionFactory
-     */
-    protected $actionFactory;
-
-    /**
-     * @var \Magento\Framework\App\Router\NoRouteHandler
-     */
-    protected $noRouteHandler;
-
-    /**
-     * @var \Magento\Catalog\Api\ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * @var \Magento\Framework\App\Response\Http
-     */
-    protected $response;
-
-    /**
      * Constructor.
      *
      * Initialize class dependencies.
@@ -58,23 +39,19 @@ class Router implements RouterInterface
      * @param \Magento\Framework\App\ResponseInterface $response
      */
     public function __construct(
-        ActionFactory $actionFactory,
-        NoRouteHandler $noRouteHandler,
-        ProductRepositoryInterface $productRepository,
-        ResponseInterface $response
+        protected ActionFactory $actionFactory,
+        protected NoRouteHandler $noRouteHandler,
+        protected ProductRepositoryInterface $productRepository,
+        protected ResponseInterface $response
     ) {
-        $this->actionFactory = $actionFactory;
-        $this->noRouteHandler = $noRouteHandler;
-        $this->productRepository = $productRepository;
-        $this->response = $response;
     }
 
     /**
      * Match corresponding URL.
      *
-     * @param RequestInterface $request
-     * @return ActionInterface|null
-     * @throws NoSuchEntityException
+     * @param \Magento\Framework\App\RequestInterface $request
+     * @return \Magento\Framework\App\ActionInterface|null
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function match(RequestInterface $request): ?ActionInterface
     {
@@ -87,7 +64,7 @@ class Router implements RouterInterface
             && \count($urlParts) == 2 && $urlParts[0] == 'goto') {
             try {
                 /** @var \Magento\Catalog\Model\Product $product */
-                $product = $this->productRepository->get(\urldecode($urlParts[1]));
+                $product = $this->productRepository->get($this->getProductIdentifier($urlParts));
                 $redirectUrl = $product->getUrlModel()->getUrl($product);
                 $this->response->setRedirect($redirectUrl, 301);
                 $request->setDispatched(true);
@@ -103,5 +80,18 @@ class Router implements RouterInterface
         }
 
         return null;
+    }
+
+    /**
+     * Examine URL parts and pull out the product identifier.
+     * 
+     * Used for other modules to "plugin".
+     *
+     * @param array $urlParts
+     * @return string
+     */
+    public function getProductIdentifier(array $urlParts): string
+    {
+        return \urldecode($urlParts[1]);
     }
 }
