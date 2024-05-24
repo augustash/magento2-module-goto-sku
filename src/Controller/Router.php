@@ -17,7 +17,7 @@ use Magento\Framework\App\Action\Redirect;
 use Magento\Framework\App\ActionFactory;
 use Magento\Framework\App\ActionInterface;
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\App\Response\HttpInterface;
 use Magento\Framework\App\Router\NoRouteHandler;
 use Magento\Framework\App\RouterInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -36,13 +36,13 @@ class Router implements RouterInterface
      * @param \Magento\Framework\App\ActionFactory $actionFactory
      * @param \Magento\Framework\App\Router\NoRouteHandler $noRouteHandler
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
-     * @param \Magento\Framework\App\ResponseInterface $response
+     * @param \Magento\Framework\App\Response\HttpInterface $response
      */
     public function __construct(
         protected ActionFactory $actionFactory,
         protected NoRouteHandler $noRouteHandler,
         protected ProductRepositoryInterface $productRepository,
-        protected ResponseInterface $response
+        protected HttpInterface $response
     ) {
     }
 
@@ -70,7 +70,7 @@ class Router implements RouterInterface
                 $request->setDispatched(true);
                 // stop processing matches and redirect
                 return $this->actionFactory->create(Redirect::class);
-            } catch (NoSuchEntityException $e) {
+            } catch (NoSuchEntityException) {
                 // stop processing and allow others to handle the request
                 $request->initForward();
                 $request->setAlias(UrlInterface::REWRITE_REQUEST_PATH_ALIAS, $identifier);
