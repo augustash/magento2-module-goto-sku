@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product SKU Redirection Module
+ * August Ash Product SKU Redirection Module
  *
- * @author    Peter McWilliams <pmcwilliams@augustash.com>
- * @copyright 2022 August Ash, Inc. (https://www.augustash.com)
+ * @author Peter McWilliams <pmcwilliams@augustash.com>
+ * @license MIT
  */
 
 declare(strict_types=1);
@@ -84,7 +84,7 @@ class Router implements RouterInterface
 
     /**
      * Examine URL parts and pull out the product identifier.
-     * 
+     *
      * Used for other modules to "plugin".
      *
      * @param array $urlParts
