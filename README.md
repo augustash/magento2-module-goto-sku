@@ -1,39 +1,46 @@
 # Magento 2 Module - Product SKU Redirection
 
-![https://www.augustash.com](http://augustash.s3.amazonaws.com/logos/ash-inline-color-500.png)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+    <a href="https://augustash.com" target="_blank">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://augustash.s3.amazonaws.com/logos/ash-inline-invert-500.png">
+            <source media="(prefers-color-scheme: light)" srcset="https://augustash.s3.amazonaws.com/logos/ash-inline-color-500.png">
+            <img alt="Shows a theme-dependent version of the AAI company logo." src="https://augustash.s3.amazonaws.com/logos/ash-inline-color-500.png">
+        </picture>
+    </a>
+</div>
 
-**This is a private module and is not currently aimed at public consumption.**
+<div align="center">
+    <img src="https://img.shields.io/badge/magento-2.4-brightgreen.svg?logo=magento&longCache=true&style=flat-square" alt="Supported Magento Versions" />
+    <a href="https://github.com/augustash/magento2-module-goto-sku/graphs/commit-activity" target="_blank">
+        <img src="https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat-square" alt="Maintained - Yes" />
+    </a>
+</div>
 
 ## Overview
 
-This is a simple module to allow for short URLs to be used for redirecting to a product's SKU.
+**This is a private module and is not currently aimed at public usage.**
+
+The `Augustash_GotoSku` module is a simple module to allow for short URLs to be used for redirecting to a product's SKU.
 
 ## Installation
 
 ### Via Composer
 
-Install the extension using Composer using our development package repository:
+Install the extension using Composer from our development package repository:
 
 ```bash
-composer config repositories.augustash composer https://augustash.repo.repman.io
-composer require augustash/module-goto-sku:~1.0.1
+composer require augustash/module-goto-sku
 bin/magento module:enable --clear-static-content Augustash_GotoSku
-bin/magento setup:upgrade
-bin/magento cache:flush
-```
-
-## Uninstall
-
-After all dependent modules have also been disabled or uninstalled, you can finally remove this module:
-
-```bash
-bin/magento module:disable --clear-static-content Augustash_GotoSku
-rm -rf app/code/Augustash/GotoSku/
-composer remove augustash/module-goto-sku
 bin/magento setup:upgrade
 bin/magento cache:flush
 ```
 
 ## Structure
 
-[Typical file structure for a Magento 2 module](http://devdocs.magento.com/guides/v2.4/extension-dev-guide/build/module-file-structure.html).
+[Typical file structure for Magento 2 modules](https://developer.adobe.com/commerce/php/development/build/component-file-structure/).
+
+## License
+
+This module is licensed under the [MIT](LICENSE.md).
